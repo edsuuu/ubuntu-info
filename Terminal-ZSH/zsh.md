@@ -47,7 +47,7 @@ code . .zshrc
 plugins=(git zsh-autosuggestions zsh-syntax-highlighting)
 ```
 ```bash
-ZSH_THEME="spaceship"
+ZSH_THEME="duellj"
 ```
 
 - Reabrir o terminal 
