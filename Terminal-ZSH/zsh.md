@@ -3,15 +3,24 @@
 ### Instalar e configurar ZSH
 
 ```bash
-sudo apt update -y && sudo apt upgrade -y && sudo apt install zsh -y
+sudo apt update -y && sudo apt upgrade -y 
+```
+
+```bash
+sudo apt install zsh -y
+```
+
+```bash
 chsh -s /bin/zsh
+```
+
+```bash
 zsh
 ```
 ### Instalar Oh-my-zsh
 
 ```bash
 sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-
 ```
 ### Instalar Spaceship Prompt
 
@@ -36,12 +45,13 @@ git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:
 sed -i 's/^ZSH_THEME=.*/ZSH_THEME="duellj"/' ~/.zshrc
 sed -i 's/^plugins=.*/plugins=(git zsh-autosuggestions zsh-syntax-highlighting)/' ~/.zshrc
 ```
+```bash
+zsh
+```
 
-
+- Old config
 ```bash
 nano ~/.zshrc
-
 ZSH_THEME="duellj"
-
 plugins=(git zsh-autosuggestions zsh-syntax-highlighting)
 ```
