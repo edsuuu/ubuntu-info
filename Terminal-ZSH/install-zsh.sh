@@ -17,7 +17,7 @@ sudo apt install zsh -y
 
 echo -e "${BLUE}🔧 Alterando shell padrão para ZSH ${NC}\n"
 
-sudo chsh -s /bin/zsh "$USER"
+chsh -s /bin/zsh
 
 echo -e "${BLUE}🚀 Instalando Oh My Zsh...${NC}\n"
 
