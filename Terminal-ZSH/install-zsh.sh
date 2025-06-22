@@ -20,28 +20,18 @@ spinner() {
     done
 }
 
-show_spinner() {
-  local pid=$1
-  local delay=0.1
-  local spinstr='|/-\'
-  local i=0
+echo -e "\n${BLUE}✅ Atualizando pacotes...${NC}\n"
 
-  while [ "$(ps a | awk '{print $1}' | grep $pid)" ]; do
-    printf "\b%c" "${spinstr:i++%${#spinstr}:1}"
-    sleep $delay
-  done
+(sudo apt update -y && sudo apt upgrade -y) > /dev/null 2>&1 & spinner
 
-  printf "\b \b \n"
-}
+echo -e  "${BLUE}⚡ Instalando ZSH... ${NC}\n"
 
-info "${BLUE}⚡ Instalando ZSH... ${NC}\n"
-(sudo apt install zsh -y > /dev/null 2>&1) & show_spinner $!
+(sudo apt install zsh -y) > /dev/null 2>&1 & spinner
 
+echo -e  "\n${BLUE}🔧 Alterando shell padrão para ZSH... ${NC}\n"
+chsh -s /bin/zsh
 
-info "\n${BLUE}🔧 Alterando shell padrão para ZSH... ${NC}\n"
-sudo chsh -s /bin/zsh "$USER"
-
-info "${BLUE}🚀 Instalando Oh My Zsh... ${NC}\n"
+echo -e  "${BLUE}🚀 Instalando Oh My Zsh... ${NC}\n"
 
 (sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended > /dev/null 2>&1) & show_spinner $!
 
