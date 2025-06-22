@@ -13,41 +13,58 @@ spinner() {
     local spinstr='|/-\'
     while kill -0 $pid 2>/dev/null; do
         local temp=${spinstr#?}
-        printf "\r[%c]  " "$spinstr"
+        printf " [%c]  " "$spinstr"
         spinstr=$temp${spinstr%"$temp"}
         sleep $delay
+        printf "\b\b\b\b\b\b"
     done
-    printf "\b\b\b\b"
 }
 
+sudo -v
+
+( while true; do sudo -n true; sleep 60; done; ) &
+
 echo -e "\n${BLUE}✅ Atualizando pacotes...${NC}\n"
-(sudo apt update -y && sudo apt upgrade -y > /dev/null 2>&1) & spinner
 
-echo -e "${BLUE}⚡ Instalando ZSH... ${NC}\n"
-(sudo apt install zsh -y > /dev/null 2>&1) & spinner
+(sudo apt update -y && sudo apt upgrade -y) > /dev/null 2>&1 & spinner
 
-echo -e "\n${BLUE}🔧 Alterando shell padrão para ZSH... ${NC}\n"
-chsh -s /bin/zsh
+echo -e "${BLUE}⚡ Instalando Neofetch...${NC}\n"
 
-echo -e "${BLUE}🚀 Instalando Oh My Zsh... ${NC}\n"
-(sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended > /dev/null 2>&1) & spinner
+echo -e "${BLUE}⚡ Instalando ZSH...${NC}\n"
 
+(sudo apt install zsh -y) > /dev/null 2>&1 & spinner
+
+echo -e "${BLUE}🔧 Alterando shell padrão para ZSH (será solicitada sua senha)...${NC}\n"
+
+sudo chsh -s /bin/zsh "$USER"
+
+echo -e "${BLUE}🚀 Instalando Oh My Zsh...${NC}\n"
+
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
 export ZSH_CUSTOM=${ZSH_CUSTOM:-~/.oh-my-zsh/custom}
 
+
 echo -e "${BLUE}✨ Instalando Spaceship Prompt...${NC}\n"
-(git clone https://github.com/spaceship-prompt/spaceship-prompt.git "$ZSH_CUSTOM/themes/spaceship-prompt" --depth=1 > /dev/null 2>&1) & spinner
+
+git clone https://github.com/spaceship-prompt/spaceship-prompt.git "$ZSH_CUSTOM/themes/spaceship-prompt" --depth=1
+ln -sf "$ZSH_CUSTOM/themes/spaceship-prompt/spaceship.zsh-theme" "$ZSH_CUSTOM/themes/spaceship.zsh-theme"
+
 
 echo -e "${BLUE}🧲 Instalando Zsh Autosuggestions...${NC}\n"
+
 git clone https://github.com/zsh-users/zsh-autosuggestions "${ZSH_CUSTOM}/plugins/zsh-autosuggestions"
+
 
 echo -e "${BLUE}🖍️ Instalando Zsh Syntax Highlighting...${NC}\n"
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git "${ZSH_CUSTOM}/plugins/zsh-syntax-highlighting"
 
 echo -e "${BLUE}🛠️ Configurando .zshrc...${NC}\n"
+
 cp ~/.zshrc ~/.zshrc.backup
 
 sed -i 's/^ZSH_THEME=.*/ZSH_THEME="duellj"/' ~/.zshrc
 sed -i 's/^plugins=.*/plugins=(git zsh-autosuggestions zsh-syntax-highlighting)/' ~/.zshrc
+
 grep -q "ZSH_THEME=" ~/.zshrc || echo 'ZSH_THEME="duellj"' >> ~/.zshrc
 
 echo -e "${GREEN}✅ Instalação concluída com sucesso!${NC}\n"
