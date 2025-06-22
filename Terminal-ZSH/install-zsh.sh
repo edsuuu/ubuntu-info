@@ -7,17 +7,30 @@ BLUE='\033[1;34m'
 CYAN='\033[1;36m'
 NC='\033[0m'
 
+spinner() {
+    local pid=$!
+    local delay=0.1
+    local spinstr='|/-\'
+    while kill -0 $pid 2>/dev/null; do
+        local temp=${spinstr#?}
+        printf " [%c]  " "$spinstr"
+        spinstr=$temp${spinstr%"$temp"}
+        sleep $delay
+        printf "\b \b \n"
+    done
+}
+
 echo -e "\n${BLUE}✅ Atualizando pacotes...${NC}"
 
-sudo apt update -y && sudo apt upgrade -y
+(sudo apt update -y && sudo apt upgrade -y) > /dev/null 2>&1 & spinner
 
 echo -e "${BLUE}⚡ Instalando ZSH...${NC}"
 
-sudo apt install zsh -y
+(sudo apt install zsh -y) > /dev/null 2>&1 & spinner
 
 echo -e "${BLUE}🔧 Alterando shell padrão para ZSH ${NC}\n"
 
-chsh -s /bin/zsh
+sudo chsh -s /bin/zsh "$USER"
 
 echo -e "${BLUE}🚀 Instalando Oh My Zsh...${NC}\n"
 
