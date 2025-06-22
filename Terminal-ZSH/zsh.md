@@ -1,15 +1,9 @@
 # Instação e configuração do zsh no linux
 
-- Atualizar os pacotes
-
-```bash
-sudo apt update -y && sudo apt upgrade -y
-
-```
 ### Instalar e configurar ZSH
 
 ```bash
-sudo apt install zsh -y
+sudo apt update -y && sudo apt upgrade -y && sudo apt install zsh -y
 chsh -s /bin/zsh
 zsh
 ```
@@ -39,18 +33,15 @@ git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:
 ### Configurar o bash Shell
 
 ```bash
-code . .zshrc
+sed -i 's/^ZSH_THEME=.*/ZSH_THEME="duellj"/' ~/.zshrc
+sed -i 's/^plugins=.*/plugins=(git zsh-autosuggestions zsh-syntax-highlighting)/' ~/.zshrc
 ```
-- editar
+
 
 ```bash
+nano ~/.zshrc
+
+ZSH_THEME="duellj"
+
 plugins=(git zsh-autosuggestions zsh-syntax-highlighting)
 ```
-```bash
-ZSH_THEME="duellj"
-```
-
-- Reabrir o terminal 
-
-
-### - [Voltar a Pagina Inicial](../README.md)
