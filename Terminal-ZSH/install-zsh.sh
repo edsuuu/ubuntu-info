@@ -16,7 +16,7 @@ spinner() {
         printf " [%c]  " "$spinstr"
         spinstr=$temp${spinstr%"$temp"}
         sleep $delay
-        printf "\b \b \n"
+        printf "\b\b\b\b\b\b"
     done
 }
 
@@ -39,15 +39,15 @@ export ZSH_CUSTOM=${ZSH_CUSTOM:-~/.oh-my-zsh/custom}
 
 echo -e "${BLUE}✨ Instalando Spaceship Prompt...${NC}\n"
 
-git clone https://github.com/spaceship-prompt/spaceship-prompt.git "$ZSH_CUSTOM/themes/spaceship-prompt" --depth=1
+(git clone https://github.com/spaceship-prompt/spaceship-prompt.git "$ZSH_CUSTOM/themes/spaceship-prompt" --depth=1) > /dev/null 2>&1 & spinner
 ln -sf "$ZSH_CUSTOM/themes/spaceship-prompt/spaceship.zsh-theme" "$ZSH_CUSTOM/themes/spaceship.zsh-theme"
 
 echo -e "${BLUE}🧲 Instalando Zsh Autosuggestions...${NC}\n"
 
-git clone https://github.com/zsh-users/zsh-autosuggestions "${ZSH_CUSTOM}/plugins/zsh-autosuggestions"
+(git clone https://github.com/zsh-users/zsh-autosuggestions "${ZSH_CUSTOM}/plugins/zsh-autosuggestions") > /dev/null 2>&1 & spinner
 
 echo -e "${BLUE}🖍️ Instalando Zsh Syntax Highlighting...${NC}\n"
-git clone https://github.com/zsh-users/zsh-syntax-highlighting.git "${ZSH_CUSTOM}/plugins/zsh-syntax-highlighting"
+(git clone https://github.com/zsh-users/zsh-syntax-highlighting.git "${ZSH_CUSTOM}/plugins/zsh-syntax-highlighting") > /dev/null 2>&1 & spinner
 
 echo -e "${BLUE}🛠️ Configurando .zshrc...${NC}\n"
 
