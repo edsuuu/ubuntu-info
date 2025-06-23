@@ -1,3 +1,5 @@
+[Voltar](../README.md)
+
 # Instação e configuração do zsh no linux
 
 ### Instalar e configurar ZSH

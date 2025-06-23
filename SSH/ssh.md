@@ -1,9 +1,30 @@
-# Geração das chave SSH
+[Voltar](../README.md)
+
+## SSH GIT
+
+```bash
+echo -n "Email do Git: "
+read SSH_EMAIL
+ssh-keygen -t ed25519 -C "$SSH_EMAIL" -N "" -f "$HOME/.ssh/id_ed25519" && eval "$(ssh-agent -s)" && ssh-add ~/.ssh/id_ed25519
+```
+
+- Pegue a chave e configure no git
+```bash
+cat ~/.ssh/id_ed25519.pub
+```
+
+- Depois de configurar no git
+
+```bash
+echo -e "Host github\n  User git\n  HostName github.com\n  IdentityFile ~/.ssh/id_ed25519" >> ~/.ssh/config
+```
+
+
+## Geração das chave SSH
 - Windows 
 ```bash
 ssh-keygen -f "C:\Users\$env:USERNAME\.ssh\nomedachavessh" -t rsa -b 4096
 ```
-- Sem nome do usuario do pc
 ```bash
 ssh-keygen -t rsa -b 4096 -C "" -f "C:\Users\$env:USERNAME\.ssh\nomedachavessh"
 ```
@@ -20,35 +41,6 @@ echo "Host nomeDoServidor
     HostName 100.100.100.100
     IdentityFile id_rsa" >> config
 
-```
-
-# Geração da chave SSH para conectar com o github
-
-- No linux / Windows
-
-```bash
-ssh-keygen -t ed25519 -C "seu-email@example.com"
-
-```
-
-- Setar o agente "Não precisa no windows"
-
-```bash
-eval "$(ssh-agent -s)"
-```
-- Adicionar a chave privada ao agente "Não precisa no windows"
-
-```bash
-ssh-add ~/.ssh/id_ed25519
-
-```
-- Pegar a chave e add ao github
-```bash
-cat ~/.ssh/id_ed25519.pub
-```
-- No windows
-```bash
-cat "C:\Users\$env:USERNAME\.ssh\id_ed25519.pub"
 ```
 
 ```bash

@@ -1,7 +1,5 @@
-# Configuração Nginx HTTP
-
-[Voltar](NGINX.md)
-
+[Voltar](../README.md)
+# Nginx HTTP
 
 ```bash
 server {

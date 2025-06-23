@@ -1,10 +1,7 @@
-# Configuração Nginx HTTPs
-
-[Voltar](NGINX.md)
-
-
+[Voltar](../README.md)
+# Nginx HTTPS
 ```bash
-# O servidor não vai responder via IP
+
 server {
   listen 80 default_server;
   server_name _;
