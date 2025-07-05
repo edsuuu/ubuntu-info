@@ -25,6 +25,7 @@ services:
   minio:
     image: minio/minio:latest
     container_name: minio_container
+    restart: always
     ports:
       - "9000:9000"      # S3
       - "9001:9001"      # Web
@@ -38,6 +39,7 @@ services:
   mailpit:
     image: axllent/mailpit:latest
     container_name: mailpit_container
+    restart: always
     ports:
       - "1025:1025"  # PORTA PARA O ENV
       - "8025:8025"  #WEB
