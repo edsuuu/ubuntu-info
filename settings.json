@@ -1,0 +1,8 @@
+  "code-runner.executorMap": {
+    "typescript": "npx ts-node --files --transpile-only"
+  },
+  "javascript.inlayHints.parameterNames.enabled": "all",
+  "typescript.inlayHints.parameterNames.enabled": "all",
+  "typescript.inlayHints.parameterNames.suppressWhenArgumentMatchesName": false,
+  "typescript.inlayHints.propertyDeclarationTypes.enabled": true,
+  "typescript.inlayHints.enumMemberValues.enabled": true,
